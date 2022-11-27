@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <body>
+        <!-- Register User Page -->
+        <div class="row justify-content-center" style="padding-top: 5%;">
+            <div class="col-lg-4 text-center">
+                
+                <h2 class="pb-5 text-color">NEW USER REGISTRATION</h2>
+
+                <% if session[:message] %>
+                    <h4> <%= session[:message] %> </h4>
+                    <% session[:message] = nil %>
+                <% end %>
+                
+                <!-- New User Registration - Form -->
+                <form  method='POST' action='/register'>
+                    <div class="form-group">
+                        <!-- <label for="user" class="text-color">Enter Username</label> -->
+                        <input type="text" id="user" class="form-control" name="username" placeholder="Username" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <!-- <label for="password" class="text-color">Enter Password</label> -->
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                    </div>
+                    
+                    <div class="form-group pt-3">
+                        <button name="login" type="submit" class="btn btn-success button">Register</button>
+                    </div>
+
+                    <div class="form-group">
+                        <a href="/home"> Go Back To Home </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+  </body>
+</html>

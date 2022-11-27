@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <!-- Play Arena Page -->
+    <div>
+        <% if session[:loginFlag] %>
+            
+            <!-- Header Section -->
+            <div class="mb-5 text-center">
+                <h2> Welcome <%= session[:username] %>! </h2>
+
+                <form method="POST" action="/logout">
+                    <div class="form-group" style="float: right; padding-right: 50px;">
+                        <button name="login" type="submit" class="btn btn-danger">Logout</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <!-- Betting Section -->
+            <div class="text-center betting-section">
+                <div class="row">
+                    
+                    <!-- Play Section -->
+                    <div id="place-bet-div" class="col-md-4">
+                        <form method="POST" action="/bet">
+                            <div id="choice-div" class="mb-2 text-color">
+                                <h6>
+                                    <label for="number" class="text-color bold"> < PLAY : CHOOSE A NUMBER > </label><br>
+                                </h6>
+
+                                <input type="radio" id="1" name="choice" value="1" required>
+                                <label for="1">1</label>&nbsp&nbsp
+                                
+                                <input type="radio" id="2" name="choice" value="2">
+                                <label for="2">2</label>&nbsp&nbsp
+                                
+                                <input type="radio" id="3" name="choice" value="3">
+                                <label for="3">3</label>&nbsp&nbsp
+                                
+                                <input type="radio" id="4" name="choice" value="4">
+                                <label for="4">4</label>&nbsp&nbsp
+                                
+                                <input type="radio" id="5" name="choice" value="5">
+                                <label for="5">5</label>&nbsp&nbsp
+                                
+                                <input type="radio" id="6" name="choice" value="6">
+                                <label for="6">6</label><br>
+                            </div>
+
+                            <div id="betamt" class="form-group mb-3">
+                                <label for="betamount" class="text-color bold"> BET AMOUNT </label>
+                                <input type="text" id="betamount" class="form-control" name="betamount" required>
+                            </div>
+
+                            <div class="form-group mb-2">
+                                <button name="bet" type="submit" class="btn btn-danger">Place Bet</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <!-- Results Section -->
+                    <div id="bet-results-div" class="col-md-4">
+                        <h6 class="text-color bold"> < RESULTS > </h6>
+                    
+                        <% if session[:status] %>
+                            <h3 class="text-color bold"> <%= session[:status] %> </h3>
+                            <% session[:status]= nil %>
+
+                            <div style="padding: 25px;">
+                                <img id="dice-img" src="<%= session[:dice_img_url] %>" alt="Dice with Face <%= session[:random] %>" />
+                            </div>
+                            <% session[:dice_img_url]= nil %>
+                        <% end %>
+                    </div>
+                </div>
+
+                
+                <!-- Statistics Section -->
+                <div>
+                    <!-- Current Session Stats - Wins, Loss & Profit  -->
+                    <div class="row col-md-6">
+                        <table class="table table-bordered text-color ">
+                            <thead>
+                                <tr>
+                                    <th> WON </th>
+                                    <th> LOST </th>
+                                    <th> PROFIT </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> <%= session[:curr_total_won] %> </td>
+                                    <td> <%= session[:curr_total_lost] %> </td>
+                                    <td> <%= session[:curr_total_profit] %> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+
+                    <!-- History Stats - Wins, Loss & Profit -->
+                    <div class="row mt-3 col-md-6">
+                        <table class="table table-bordered text-color">
+                            <thead>
+                                <tr>
+                                    <th> TOTAL WON </th>
+                                    <th> TOTAL LOST </th>
+                                    <th> TOTAL PROFIT </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> <%= session[:total_won] %> </td>
+                                    <td> <%= session[:total_lost] %> </td>
+                                    <td> <%= session[:total_profit] %> </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            <div>
+
+        <% end %>
+    </div>
+
+</body>
+</html>
